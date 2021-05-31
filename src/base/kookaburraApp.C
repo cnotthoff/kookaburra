@@ -30,6 +30,9 @@ kookaburraApp::registerAll(Factory & f, ActionFactory & af, Syntax & syntax)
   Registry::registerActionsTo(af, {"kookaburraApp"});
 
   /* register custom execute flags, action syntax, etc. here */
+  
+  registerSyntax("CNAction", "Modules/CN/CNAC/*");
+  
 }
 
 void
