@@ -19,11 +19,11 @@
   enable_jit = true
 []
 [Variables]
-  #[./eta]
-  #  order = FIRST
-  #  family = LAGRANGE
+  [./eta]
+    order = FIRST
+    family = LAGRANGE
   #  #initial_condition = 0.4
-  #[../]
+  [../]
   #[./c]
   #  order = FIRST
   #  family = LAGRANGE
