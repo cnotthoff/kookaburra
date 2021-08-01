@@ -25,6 +25,11 @@ IontrackNucleationForce::validParams()
   params.addParam<Real>("no_nucleus_value", 0.0, "Variable value indicating no nucleus is present");
   params.addParam<Real>(
       "nucleus_value", 1.0, "Variable value indicating the presence of a nucleus");
+  //params.addRequiredParam<UserObjectName>(
+  //    "noise", "ConservedNoise userobject that produces the random numbers");
+  //params.addParam<Real>(
+  //    "noise_value", 0.1, "Variable value indicating nucleus noise amplitude");
+  
   return params;
 }
 
@@ -36,6 +41,8 @@ IontrackNucleationForce::IontrackNucleationForce(const InputParameters & params)
     //_dmaskdarg(_n_args),
     _v0(getParam<Real>("no_nucleus_value")),
     _v1(getParam<Real>("nucleus_value"))
+    //_noise(getUserObject<ConservedNoiseInterface>("noise")),
+    //_amplitude(getParam<Real>("noise_value"))
 {
   //  // Get derivatives of mask wrt coupled variables
   //for (unsigned int i = 0; i < _n_args; ++i)
@@ -59,7 +66,8 @@ IontrackNucleationForce::precalculateResidual()
 Real
 IontrackNucleationForce::computeQpResidual()
 {
-  return -((*_nucleus)[_qp] * (_v1 - _v0) + _v0) * _test[_i][_qp] * _mask[_qp];
+  //Real v1 = _v1 + (_noise.getQpValue(_current_elem->id(), _qp)+1.0)*_amplitude;
+  return -((*_nucleus)[_qp] * (_v1 - _v0) + _v0) * _mask[_qp]* _test[_i][_qp];
 }
 
 /*

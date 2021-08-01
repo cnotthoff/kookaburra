@@ -11,6 +11,9 @@
 
 #include "Kernel.h"
 
+//#include "LangevinNoise.h"
+//#include "ConservedNoiseBase.h"
+
 // Forward declaration
 class IontrackNucleationMap;
 
@@ -37,11 +40,15 @@ protected:
   
   /// nucleus data for the current element
   const std::vector<Real> * _nucleus;
-
   ///@{ Bounds for the returned values
   const Real _v0;
   const Real _v1;
   ///@}
+
+  ///Noise to add intisde the tracks
+  //const ConservedNoiseInterface & _noise;
+  //const Real &_amplitude;
+  
   /*
     /// derivative of the mask wrt the kernel's nonlinear variable
   const MaterialProperty<Real> & _dmaskdv;
