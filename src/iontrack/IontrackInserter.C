@@ -98,10 +98,11 @@ IontrackInserter::execute()
     if (!_time_dep_stats)
     {
       // if using time-independent statistics, this would be more like a nucleation fraction
-      if (random < rate)
+      if (random < rate){
         addNucleus(qp);
-      _N_ions++;
-    }
+	_N_ions++;
+      }
+   }
     else
     {
       // We check the random number against the inverse of the zero probability.
@@ -109,9 +110,10 @@ IontrackInserter::execute()
       // that probability, which is always strictly larger than the actual probability.
       // The expression below should short circuit and the expensive exponential
       // should rarely get evaluated
-      if (random < rate * _fe_problem.dt() && random < (1.0 - std::exp(-rate * _fe_problem.dt())))
+      if (random < rate * _fe_problem.dt() && random < (1.0 - std::exp(-rate * _fe_problem.dt()))){
         addNucleus(qp);
-      _N_ions++;
+	_N_ions++;
+      }
     }
     
     /*
