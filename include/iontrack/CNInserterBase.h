@@ -185,6 +185,7 @@ public:
     // get the global number of changes (i.e. changes to _global_nucleus_list)
     _communicator.broadcast(_changes_made.first);
     _communicator.broadcast(_changes_made.second);
+    _communicator.broadcast(_N_ions);
     
     // gather the total nucleation rate
     //_communicator.broadcast(_nucleation_rate);
@@ -208,7 +209,8 @@ protected:
       new_nucleus.center = Point(ran1*_lwd(0),ran2*_lwd(1),ran3*_lwd(2));
       new_nucleus.center += _box_min;
       new_nucleus.radius = _radius;
-
+      
+      _N_ions++;
       _global_nucleus_list.push_back(new_nucleus);
       _changes_made.first++;
   };
@@ -231,6 +233,8 @@ protected:
   Point _lwd;
   Point _box_min;
   Point _e1;
+
+  int  _N_ions;
   /// store the local nucleus radius
   //  const MaterialProperty<Real> & _local_radius;
 

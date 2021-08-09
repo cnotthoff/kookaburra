@@ -76,7 +76,7 @@ CNInserter::validParams()
   params.addParam<bool>("time_dependent_statistics",
                         true,
                         "flag if time-dependent or time-independent statistics are used");
-  params.addRequiredParam<int>("dir", "Ion track direction (x=0, y=1, z=2)");
+  params.addParam<int>("dir", 1, "Ion track direction (x=0, y=1, z=2)");
   params.addRequiredParam<Real>("flux", "Ion flux in ions per cm^2 s");
   params.addRequiredParam<Real>("scale", "Lenght scale used in the simulation");
   params.addRequiredParam<Real>("radius", "base radius of the track");
@@ -186,13 +186,6 @@ void CNNucleationMap::execute()
       Real local_radius = 0.0;
       for (unsigned i = 0; i < _nucleus_list.size(); ++i)
       {
-	//Point q_tmp = _q_point[qp];
-	//q_tmp(0) = cos(_angle)*(_q_point[qp](0)-_nucleus_list[i].center(0)) - sin(_angle)*(_q_point[qp](1)-_nucleus_list[i].center(1));
-	//q_tmp(1) = cos(_angle)*(_q_point[qp](1)-_nucleus_list[i].center(1)) + sin(_angle)*(_q_point[qp](0)-_nucleus_list[i].center(0));
-
-	//q_tmp(0)+=_nucleus_list[i].center(0);
-	//q_tmp(1) =_nucleus_list[i].center(1);
-
 	Point tmp1 = _nucleus_list[i].center - _q_point[qp];;
 	Real t = -tmp1 * _e1;
 	tmp1 = _nucleus_list[i].center + t*_e1;
